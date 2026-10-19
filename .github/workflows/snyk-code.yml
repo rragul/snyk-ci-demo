@@ -20,7 +20,7 @@ jobs:
       - name: Snyk Code test
         # Phase 1 (report-only): keep this line.
         # Phase 2 (blocking): delete it so findings fail the check.
-        continue-on-error: true
+        # continue-on-error: true
         run: snyk code test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
