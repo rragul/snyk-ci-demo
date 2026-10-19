@@ -1,0 +1,26 @@
+name: Snyk Code
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  snyk-code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Pin to a commit SHA before using this in org repos.
+      - uses: snyk/actions/setup@master
+
+      - name: Snyk Code test
+        # Phase 1 (report-only): keep this line.
+        # Phase 2 (blocking): delete it so findings fail the check.
+        continue-on-error: true
+        run: snyk code test
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
